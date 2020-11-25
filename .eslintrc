@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint-config-sumikko","eslint-config-sumikko/ts"],
+  "rules": {
+    "no-underscore-dangle":0,
+    "camelcase": 0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "s2luv",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "prestart": "rimraf lib",
+    "start": "tsc -w",
+    "prebuild": "rimraf lib",
+    "build": "ncc build src/index.ts --out lib --minify",
+    "lint": "eslint ./src/*.ts ./src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivgtr/s2luv.git"
+  },
+  "author": "ivgtr <gear.1112t.o@gmail.com> (https://github.com/ivgtr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivgtr/s2luv/issues"
+  },
+  "homepage": "https://github.com/ivgtr/s2luv#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "@types/node-fetch": "^2.5.7",
+    "@vercel/ncc": "^0.25.0",
+    "eslint": "^7.12.1",
+    "eslint-config-sumikko": "^0.0.4",
+    "husky": "^4.3.0",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint ./src/**/*.ts ./src/*.ts"
+    }
+  }
+}
