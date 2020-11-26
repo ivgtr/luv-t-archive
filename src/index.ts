@@ -7,10 +7,12 @@ dotenv.config()
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
 const url = 'https://api.twitter.com/1.1/favorites/list.json'
 
+// データをsheetに保存し、driveにimage/videoを保存
 const saveToData = async (data: media[]): Promise<void> => {
   console.log(data)
 }
 
+// tweetを取得し、整形したものを返す
 const getTweetLike = async (): Promise<media[]> => {
   const headers = {
     Authorization: `Bearer ${twitterToken}`
@@ -21,21 +23,28 @@ const getTweetLike = async (): Promise<media[]> => {
     headers
   }
 
+  // tweet取得数
   const count = 5
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
 
+    // tweetを取得
     fetch(url + param, options)
       .then((response) => response.json())
       .then((result: Status[]) => {
+        // 整形したものが入る
         const medias: media[] = []
         result.map((tweet) => {
+          // imageもしくはvideoがあるか判定
           if (tweet?.extended_entities?.media) {
+            // 配列の形なのでそれに沿って処理
             tweet.extended_entities.media.map((media) => {
               const name = media.media_url.split('/')
               let video_url: VideoVariant | null = null
+              // videoの場合の処理
               if (media.type === 'video' && media?.video_info?.variants) {
+                // bitrate順に並び替えて一番良いものを返す
                 const getNumSafe = ({
                   bitrate = -Infinity
                 }: {
@@ -56,7 +65,7 @@ const getTweetLike = async (): Promise<media[]> => {
           }
           return tweet
         })
-
+        // 一通り処理したものをPromise元に返す
         return resolve(medias)
       })
       .catch((err) => {
@@ -64,6 +73,7 @@ const getTweetLike = async (): Promise<media[]> => {
       })
   })
 
+  // 呼び出し元に整形したものを返す
   return favoriteData
 }
 
