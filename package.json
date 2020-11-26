@@ -22,6 +22,7 @@
   "homepage": "https://github.com/ivgtr/tweet-s2luv#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "googleapis": "^65.0.0",
     "node-fetch": "^2.6.1",
     "twitter-d": "^0.4.0"
   },
