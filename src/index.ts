@@ -1,11 +1,17 @@
 import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
+import { Status } from 'twitter-d'
 
 dotenv.config()
 
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
+const url = 'https://api.twitter.com/1.1/favorites/list.json'
 
-const requestTwitterData = async (): Promise<any> => {
+const saveToData = async (data: media[]): Promise<void> => {
+  console.log(data)
+}
+
+const getTweetLike = async (): Promise<media[]> => {
   const headers = {
     Authorization: `Bearer ${twitterToken}`
   }
@@ -17,24 +23,33 @@ const requestTwitterData = async (): Promise<any> => {
 
   const count = 5
 
-  let url = 'https://api.twitter.com/1.1/favorites/list.json'
+  const favoriteData: media[] = await new Promise((resolve, reject) => {
+    const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
 
-  const timelineData = await new Promise((resolve, reject) => {
-    url += `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
-
-    fetch(url, options)
+    fetch(url + param, options)
       .then((response) => response.json())
-      .then((result) => {
-        const medias = []
+      .then((result: Status[]) => {
+        const medias: media[] = []
         result.map((tweet) => {
-          if (tweet.extended_entities) {
+          if (tweet?.extended_entities?.media) {
             tweet.extended_entities.media.map((media) => {
               const name = media.media_url.split('/')
+              let video_url: VideoVariant | null = null
+              if (media.type === 'video' && media?.video_info?.variants) {
+                const getNumSafe = ({
+                  bitrate = -Infinity
+                }: {
+                  bitrate?: number | undefined | null
+                }) => bitrate as number
+                video_url = media.video_info.variants.reduce((acc, r) =>
+                  getNumSafe(r) > getNumSafe(acc) ? r : acc
+                )
+              }
               medias.push({
-                url: media.url,
-                name: name[name.length - 1].split('.')[0],
-                type: media.type,
-                media_url: media.media_url
+                tweet_url: media.url,
+                file_name: name[name.length - 1],
+                media_type: media.type,
+                media_url: video_url ? video_url.url : media.media_url
               })
               return media
             })
@@ -49,19 +64,14 @@ const requestTwitterData = async (): Promise<any> => {
       })
   })
 
-  console.log(timelineData)
-
-  return timelineData
-}
-
-const getTweetData = async () => {
-  // const countData = await requestTwitterData()
+  return favoriteData
 }
 
 const main = async () => {
-  // const resultText = await getTweetData()
+  const mediaData = await getTweetLike()
+  saveToData(mediaData)
 }
 
 ;(async () => {
-  console.log("test")
+  await main()
 })()

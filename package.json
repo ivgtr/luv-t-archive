@@ -22,7 +22,8 @@
   "homepage": "https://github.com/ivgtr/s2luv#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "twitter-d": "^0.4.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",

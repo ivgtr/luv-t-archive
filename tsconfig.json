@@ -3,6 +3,7 @@
   "module": "ESNext",
   "sourceMap": true,
   "compilerOptions": {
+    "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": ".",
