@@ -1,5 +1,5 @@
 {
-  "name": "s2luv",
+  "name": "tweet-s2luv",
   "version": "0.0.1",
   "description": "",
   "main": "./lib/index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivgtr/s2luv.git"
+    "url": "git+https://github.com/ivgtr/tweet-s2luv.git"
   },
   "author": "ivgtr <gear.1112t.o@gmail.com> (https://github.com/ivgtr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivgtr/s2luv/issues"
+    "url": "https://github.com/ivgtr/tweet-s2luv/issues"
   },
-  "homepage": "https://github.com/ivgtr/s2luv#readme",
+  "homepage": "https://github.com/ivgtr/tweet-s2luv#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
