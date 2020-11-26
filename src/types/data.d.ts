@@ -1,4 +1,5 @@
 type media = {
+  tweet_time: string
   tweet_url: string
   file_name: string
   media_type: string
