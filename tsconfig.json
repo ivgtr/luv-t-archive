@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "outDir": "./lib/",
-    "lib": [ "es2015" ]
+    "lib": [ "es2019" ]
   },
   "include": [
     "./src/*",
