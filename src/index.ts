@@ -1,16 +1,12 @@
 import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
 import { Status } from 'twitter-d'
+import saveToData from './utils/saveToData'
 
 dotenv.config()
 
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
 const url = 'https://api.twitter.com/1.1/favorites/list.json'
-
-// データをsheetに保存し、driveにimage/videoを保存
-const saveToData = async (data: media[]): Promise<void> => {
-  console.log(data)
-}
 
 // tweetを取得し、整形したものを返す
 const getTweetLike = async (): Promise<media[]> => {
@@ -24,7 +20,7 @@ const getTweetLike = async (): Promise<media[]> => {
   }
 
   // tweet取得数
-  const count = 5
+  const count = 15
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
@@ -36,6 +32,7 @@ const getTweetLike = async (): Promise<media[]> => {
         // 整形したものが入る
         const medias: media[] = []
         result.map((tweet) => {
+          const tweet_time = tweet.created_at
           // imageもしくはvideoがあるか判定
           if (tweet?.extended_entities?.media) {
             // 配列の形なのでそれに沿って処理
@@ -55,6 +52,7 @@ const getTweetLike = async (): Promise<media[]> => {
                 )
               }
               medias.push({
+                tweet_time,
                 tweet_url: media.url,
                 file_name: name[name.length - 1],
                 media_type: media.type,
@@ -79,7 +77,9 @@ const getTweetLike = async (): Promise<media[]> => {
 
 const main = async () => {
   const mediaData = await getTweetLike()
-  saveToData(mediaData)
+  if (await saveToData(mediaData)) {
+    console.log('complete')
+  }
 }
 
 ;(async () => {
