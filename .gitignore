@@ -162,3 +162,5 @@ Temporary Items
 .apdisk
 
 lib/
+client_secret.*
+credentials.*
