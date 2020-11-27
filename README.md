@@ -1,10 +1,17 @@
 # tweet-s2luv
 
 #### これは何?  
-自分がtwitterでfavorite(love)したツイートをspreadsheetに列挙し、driveに保存します  
+自分がtwitterでfavorite(love)したツイートをspreadsheetに列挙し、画像・動画をdriveに保存します  
 このrepository をFork し必要な`Token`をSecrets に登録すれば自動で収集する様になっています(予定)
 
 
+## 進捗
+- [x] ツイートを取得
+- [x] 取得したツイートとスプレッドシートを比較
+- [x] スプレッドシートにツイートを整形し、保存
+- [x] ツイートの画像・動画をドライヴに保存
+- [ ] ドライヴに保存中、エラーが起きた際のハンドリング
+- [ ] CIの設定
 ## License
 MIT ©[ivgtr](https://github.com/ivgtr)
 
