@@ -23,7 +23,7 @@ const getTweetLike = async (): Promise<media[]> => {
   }
 
   // tweet取得数
-  const count = 200
+  const count = 100
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
