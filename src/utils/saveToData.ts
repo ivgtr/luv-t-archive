@@ -103,7 +103,7 @@ const setSheetData = async (values: string[][]) => {
       }
     })
   } catch (error) {
-    console.log(`The API returned an error: ${error}`)
+    console.log(`The Sheet API returned an error: ${error}`)
   }
 }
 
