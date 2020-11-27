@@ -1,9 +1,12 @@
 import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
 import { Status } from 'twitter-d'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ja'
 import saveToData from './utils/saveToData'
 
 dotenv.config()
+dayjs.locale('ja')
 
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
 const url = 'https://api.twitter.com/1.1/favorites/list.json'
@@ -20,7 +23,7 @@ const getTweetLike = async (): Promise<media[]> => {
   }
 
   // tweet取得数
-  const count = 15
+  const count = 200
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
@@ -31,8 +34,11 @@ const getTweetLike = async (): Promise<media[]> => {
       .then((result: Status[]) => {
         // 整形したものが入る
         const medias: media[] = []
+        const save_time = dayjs().format('YYYY/MMMM/DD日(ddd) HH:mm')
         result.map((tweet) => {
-          const tweet_time = tweet.created_at
+          const tweet_time = dayjs(tweet.created_at).format(
+            'YYYY/MMMM/DD日(ddd) HH:mm'
+          )
           // imageもしくはvideoがあるか判定
           if (tweet?.extended_entities?.media) {
             // 配列の形なのでそれに沿って処理
@@ -52,11 +58,12 @@ const getTweetLike = async (): Promise<media[]> => {
                 )
               }
               medias.push({
-                tweet_time,
                 tweet_url: media.url,
+                tweet_time,
                 file_name: name[name.length - 1],
                 media_type: media.type,
-                media_url: video_url ? video_url.url : media.media_url
+                media_url: video_url ? video_url.url : media.media_url,
+                save_time
               })
               return media
             })
@@ -78,7 +85,9 @@ const getTweetLike = async (): Promise<media[]> => {
 const main = async () => {
   const mediaData = await getTweetLike()
   if (await saveToData(mediaData)) {
-    console.log('complete')
+    console.log('全部終わりました')
+  } else {
+    console.log('何か問題が起きた様です')
   }
 }
 
