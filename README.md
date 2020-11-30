@@ -2,8 +2,38 @@
 
 #### これは何?  
 自分がtwitterでfavorite(love)したツイートをspreadsheetに列挙し、画像・動画をdriveに保存します  
-このrepository をFork し必要な`Token`をSecrets に登録すれば自動で収集する様になっています(予定)
+このrepositoryをForkし必要な`Token`を`Settings > Secrets`に登録すれば自動で収集する様になっています
 
+## Setup
+### ※注意
+_導入はかなり面倒くさいです_
+
+### 準備
+1. GCP Service Account を作成します (https://console.cloud.google.com/)
+1.  `Drive API` と`Sheets API` を有効化し、`JSON` タイプのキーを作成し、保存しておきます
+    1. `Drive API` と`Sheets API` を有効化します (https://console.cloud.google.com/apis/library)
+    1. 作成したサービスアカウントを選択肢、`JSON` タイプのキーを作成し、保存しておきます (https://console.cloud.google.com/iam-admin/serviceaccounts)
+1. ファイルリストを保存する為に、`Google Spreadsheets` に新しいシートを作り、そのIDとシートの名前をコピーしておきます (https://docs.google.com/spreadsheets)
+1. ファイルを保存する為に、`Google Drive` にフォルダを作り、そのIDをコピーしておきます (https://drive.google.com/drive)
+1. Twitter Developers ページで、任意のアカウントでログインします (https://developer.twitter.com/en/apps/)
+   1. 新しいApp を作成するために開発者申請をします
+   1. 新しいApp を作成し、Bearer Token を作成し、それをコピーしておきます
+1. 利用したいTwitter Account のID をコピーしておきます
+
+### 始めるために
+1. このrepository をFork します
+1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/tweet-s2luv/blob/master/.github/workflows/schedule.yml#L24-L31) を編集します:
+   - **TWITTER_ID:** 利用するTwitter のID
+   - **SHEET_NAME:** 利用するSpreadsheets の名前 (Sheet1/シート1)
+1. repository のSettings > Secrets へ行きます
+1. 以下の環境変数を追加します:
+   - **TWITTER_TOKEN:** 上記で生成された Twitter のBearer Token
+   - **SHEET_NAME:** 利用するSpreadsheets のシートID: `https://docs.google.com/spreadsheets/d/`**`xxxxxxxxxxxxxxxxxxxx`**`/edit`.
+   - **DRIVE_FOLDER_ID:** 利用するDrive のシートID: `https://drive.google.com/drive/folders/`**`xxxxxxxxxxxxxxxxxxxx`**.
+   - **SERVICE_CLIENT_EMAIL:** 上記で保存したサービスアカウントの`JSON` 鍵の`client_email` 部分
+   - **SERVICE_PRIVATE_KEY:** 上記で保存したサービスアカウントの`JSON` 鍵の`private_key` 部分
+     - 改行コードが含まれていると上手く動かないので除去し、改行する
+     - `$ echo "実際のkey"` などすると良い感じ出力される
 
 ## 進捗
 - [x] ツイートを取得
