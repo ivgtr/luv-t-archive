@@ -11,7 +11,10 @@ dayjs.locale('ja')
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
 const url = 'https://api.twitter.com/1.1/favorites/list.json'
 
-// tweetを取得し、整形したものを返す
+//
+/**
+ * tweetを取得し、整形したものを返す
+ */
 const getTweetLike = async (): Promise<media[]> => {
   const headers = {
     Authorization: `Bearer ${twitterToken}`
@@ -23,7 +26,7 @@ const getTweetLike = async (): Promise<media[]> => {
   }
 
   // tweet取得数
-  const count = 200
+  const count = 30
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
@@ -86,6 +89,10 @@ const getTweetLike = async (): Promise<media[]> => {
   return favoriteData
 }
 
+//
+/**
+ * 処理の結果によってコメントが変わる
+ */
 const main = async () => {
   const mediaData = await getTweetLike()
   if (await saveToData(mediaData)) {
