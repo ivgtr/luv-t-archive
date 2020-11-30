@@ -162,7 +162,7 @@ const setSheetData = async (shapData: string[][]): Promise<void> => {
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       resource: {
-        data: shapData
+        values: shapData
       }
     })
   } catch (error) {
@@ -175,7 +175,7 @@ const setSheetData = async (shapData: string[][]): Promise<void> => {
  * 処理の結果によってboolean型を返す
  * @param resources
  */
-const saveToData = async (resources: media[]): Promise<boolean> => {
+const saveToData = async (resources: media[]): Promise<void> => {
   try {
     const filterData = await filterResources(resources)
     if (filterData.length) {
@@ -185,10 +185,8 @@ const saveToData = async (resources: media[]): Promise<boolean> => {
     } else {
       console.log('新しいデータはありません')
     }
-
-    return true
   } catch (error) {
-    return error
+    throw new Error(error)
   }
 }
 
