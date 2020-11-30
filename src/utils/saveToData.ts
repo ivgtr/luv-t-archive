@@ -10,14 +10,14 @@ const {
   SHEET_NAME: sheetName,
   SHEET_ID: sheetId,
   DRIVE_FOLDER_ID: driveFolderId,
-  SUPPORT_CLIENT_EMAIL: supportClientEmail,
-  SUPPORT_PRIVATE_KEY: supportPrivateKey
+  SERVICE_CLIENT_EMAIL: serviceClientEmail,
+  SERVICE_PRIVATE_KEY: servicePrivateKey
 } = process.env
 
 const jwtClient = new google.auth.JWT(
-  supportClientEmail,
+  serviceClientEmail,
   undefined,
-  supportPrivateKey,
+  servicePrivateKey,
   [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'

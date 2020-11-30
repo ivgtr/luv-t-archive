@@ -27,5 +27,5 @@ jobs:
           SHEET_NAME: s2luv-sheet
           SHEET_ID: ${{ secrets.SHEET_ID }}
           DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
-          SUPPORT_CLIENT_EMAIL: ${{ secrets.SUPPORT_CLIENT_EMAIL }}
-          SUPPORT_PRIVATE_KEY: ${{ secrets.SUPPORT_PRIVATE_KEY }}
+          SERVICE_CLIENT_EMAIL: ${{ secrets.SERVICE_CLIENT_EMAIL }}
+          SERVICE_PRIVATE_KEY: ${{ secrets.SERVICE_PRIVATE_KEY }}
