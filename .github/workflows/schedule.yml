@@ -5,7 +5,7 @@ on:
     branches: ["master"]
 
 jobs:
-  update-gist:
+  working-tweet-s2luv:
     runs-on: ubuntu-latest
     strategy:
       matrix:

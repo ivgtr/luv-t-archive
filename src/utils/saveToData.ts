@@ -188,8 +188,7 @@ const saveToData = async (resources: media[]): Promise<boolean> => {
 
     return true
   } catch (error) {
-    console.log(error)
-    return false
+    return error
   }
 }
 
