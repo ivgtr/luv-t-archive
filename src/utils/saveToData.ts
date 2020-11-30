@@ -3,24 +3,26 @@ import * as dotenv from 'dotenv'
 import { PassThrough } from 'stream'
 import fetch from 'node-fetch'
 import fileType from 'file-type'
-import creds from '../jsons/client_secret.json'
 
 dotenv.config()
 
 const {
   SHEET_NAME: sheetName,
   SHEET_ID: sheetId,
-  FOLDER_ID: folderId
+  FOLDER_ID: folderId,
+  CLIENT_EMAIL: clientEmail,
+  PRIVATE_KEY: privateKey
 } = process.env
 
 const jwtClient = new google.auth.JWT(
-  creds.client_email,
+  clientEmail,
   undefined,
-  creds.private_key,
+  privateKey,
   [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
-  ]
+  ],
+  undefined
 )
 
 // スプレッドシートAPIはv4を使う
