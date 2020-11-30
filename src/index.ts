@@ -94,8 +94,8 @@ const getTweetLike = async (): Promise<media[]> => {
  * 処理の結果によってコメントが変わる
  */
 const main = async () => {
-  const mediaData = await getTweetLike()
   try {
+    const mediaData = await getTweetLike()
     await saveToData(mediaData)
     console.log('全ての処理が完了')
   } catch (error) {
