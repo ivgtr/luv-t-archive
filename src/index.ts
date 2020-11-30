@@ -23,7 +23,7 @@ const getTweetLike = async (): Promise<media[]> => {
   }
 
   // tweet取得数
-  const count = 100
+  const count = 200
 
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
@@ -39,11 +39,11 @@ const getTweetLike = async (): Promise<media[]> => {
           const tweet_time = dayjs(tweet.created_at).format(
             'YYYY/MMMM/DD日(ddd) HH:mm'
           )
-          // imageもしくはvideoがあるか判定
+          // imageもしくはvideoが存在するか判定
           if (tweet?.extended_entities?.media) {
             // 配列の形なのでそれに沿って処理
             tweet.extended_entities.media.map((media) => {
-              const name = media.media_url.split('/')
+              let name = media.media_url.split('/')
               let video_url: VideoVariant | null = null
               // videoの場合の処理
               if (media.type === 'video' && media?.video_info?.variants) {
@@ -56,6 +56,10 @@ const getTweetLike = async (): Promise<media[]> => {
                 video_url = media.video_info.variants.reduce((acc, r) =>
                   getNumSafe(r) > getNumSafe(acc) ? r : acc
                 )
+                const remParam = video_url.url.indexOf('?')
+                name = remParam
+                  ? video_url.url.substring(0, remParam).split('/')
+                  : video_url.url.split('/')
               }
               medias.push({
                 tweet_url: media.url,
@@ -85,7 +89,7 @@ const getTweetLike = async (): Promise<media[]> => {
 const main = async () => {
   const mediaData = await getTweetLike()
   if (await saveToData(mediaData)) {
-    console.log('全部終わりました')
+    console.log('全ての処理が完了')
   } else {
     console.log('何か問題が起きた様です')
   }
