@@ -9,15 +9,15 @@ dotenv.config()
 const {
   SHEET_NAME: sheetName,
   SHEET_ID: sheetId,
-  FOLDER_ID: folderId,
-  CLIENT_EMAIL: clientEmail,
-  PRIVATE_KEY: privateKey
+  DRIVE_FOLDER_ID: driveFolderId,
+  SUPPORT_CLIENT_EMAIL: supportClientEmail,
+  SUPPORT_PRIVATE_KEY: supportPrivateKey
 } = process.env
 
 const jwtClient = new google.auth.JWT(
-  clientEmail,
+  supportClientEmail,
   undefined,
-  privateKey,
+  supportPrivateKey,
   [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
@@ -111,7 +111,7 @@ const saveDriveData = async (filterData: media[]) => {
             .create(
               {
                 requestBody: {
-                  parents: [folderId as string],
+                  parents: [driveFolderId as string],
                   mimeType: fileData.mime,
                   name: data.file_name
                 },
