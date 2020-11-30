@@ -95,10 +95,12 @@ const getTweetLike = async (): Promise<media[]> => {
  */
 const main = async () => {
   const mediaData = await getTweetLike()
-  if (await saveToData(mediaData)) {
-    console.log('全ての処理が完了')
-  } else {
-    console.log('何か問題が起きた様です')
+  try {
+    if (await saveToData(mediaData)) {
+      console.log('全ての処理が完了')
+    }
+  } catch (error) {
+    console.log(`何か問題が起きた様です\n${error}`)
   }
 }
 
