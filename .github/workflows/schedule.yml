@@ -1,8 +1,8 @@
-name: Update gist with Twitter data
+name: Save to Love Tweet Working
 
 on:
   push:
-    ["master"]
+    branches: ["master"]
 
 jobs:
   update-gist:
