@@ -162,7 +162,7 @@ const setSheetData = async (shapData: string[][]): Promise<void> => {
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
       resource: {
-        shapData
+        data: shapData
       }
     })
   } catch (error) {
