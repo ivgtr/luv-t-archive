@@ -1,0 +1,31 @@
+name: Update gist with Twitter data
+
+on:
+  push:
+    ["master"]
+
+jobs:
+  update-gist:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: working tweet-s2luv!
+        run: |
+          node lib/index.js
+        env:
+          TZ: Asia/Tokyo
+          TWITTER_ID: mawaru_hana
+          TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
+          SHEET_NAME: s2luv-sheet
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
+          SUPPORT_CLIENT_EMAIL: ${{ secrets.SUPPORT_CLIENT_EMAIL }}
+          SUPPORT_PRIVATE_KEY: ${{ secrets.SUPPORT_PRIVATE_KEY }}
