@@ -40,7 +40,7 @@ const drive = google.drive({
  */
 export const filterResources = async (resources: media[]): Promise<media[]> => {
   const filterData: media[] = []
-
+  if (!resources.length) return filterData
   try {
     const responseGetSheet = await sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
@@ -55,7 +55,7 @@ export const filterResources = async (resources: media[]): Promise<media[]> => {
       return media
     })
   } catch (error) {
-    throw new Error(`The Sheet API returned an ${error}`)
+    throw `The Sheet API returned an ${error}`
   }
 
   return filterData
@@ -132,7 +132,7 @@ export const saveDriveData = async (filterData: media[]) => {
               return resolve(data)
             })
             .catch((err) => {
-              throw new Error(err)
+              throw err
             })
         } catch (err) {
           return reject(err)
@@ -160,13 +160,13 @@ export const setSheetData = async (shapData: string[][]): Promise<void> => {
       }
     })
   } catch (error) {
-    throw new Error(`The Sheet API returned an ${error}`)
+    throw `The Sheet API returned an ${error}`
   }
 }
 
 //
 /**
- * 処理の結果によってboolean型を返す
+ * 一連の処理のエラーをハンドリングする
  * @param resources
  */
 export const saveToData = async (resources: media[]): Promise<void> => {
