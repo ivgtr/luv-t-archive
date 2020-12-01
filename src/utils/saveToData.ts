@@ -55,7 +55,7 @@ export const filterResources = async (resources: media[]): Promise<media[]> => {
       return media
     })
   } catch (error) {
-    throw `The Sheet API returned an ${error}`
+    throw `The get Sheet API returned an ${error}`
   }
 
   return filterData
@@ -92,8 +92,8 @@ export const saveDriveData = async (filterData: media[]) => {
               mime
             })
           })
-          .catch((err) => {
-            return reject(err)
+          .catch((error) => {
+            return reject(error)
           })
       })
 
@@ -131,15 +131,17 @@ export const saveDriveData = async (filterData: media[]) => {
               ])
               return resolve(data)
             })
-            .catch((err) => {
-              throw err
+            .catch((error) => {
+              throw `The Sheet API returned an ${error}`
             })
-        } catch (err) {
-          return reject(err)
+        } catch (error) {
+          return reject(error)
         }
       })
     })
-  )
+  ).catch((error) => {
+    console.log(error)
+  })
 
   return shapData
 }
@@ -160,7 +162,7 @@ export const setSheetData = async (shapData: string[][]): Promise<void> => {
       }
     })
   } catch (error) {
-    throw `The Sheet API returned an ${error}`
+    throw `The append Sheet API returned an ${error}`
   }
 }
 
