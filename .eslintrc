@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint-config-sumikko","eslint-config-sumikko/ts"],
+  "extends": ["eslint-config-sumikko", "eslint-config-sumikko/node", "eslint-config-sumikko/ts", "eslint-config-sumikko/pritter"],
   "rules": {
     "no-underscore-dangle":0,
     "camelcase": 0
