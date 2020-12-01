@@ -153,15 +153,12 @@ const saveDriveData = async (filterData: media[]) => {
  */
 const setSheetData = async (shapData: string[][]): Promise<void> => {
   try {
-    // 型がおかしいのでts-ignore
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
       range: `${sheetName}!A1`,
       valueInputOption: 'USER_ENTERED',
       insertDataOption: 'INSERT_ROWS',
-      resource: {
+      requestBody: {
         values: shapData
       }
     })
