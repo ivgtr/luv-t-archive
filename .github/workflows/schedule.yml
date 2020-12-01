@@ -1,10 +1,10 @@
 name: Save to Love Tweet Working
 
-# on:
-#   schedule:
-#     - cron: "0 3,15 * * *"
-#   push:
-#     branches: [ master ]
+on:
+  schedule:
+    - cron: "0 3,15 * * *"
+  push:
+    branches: [ master ]
 
 jobs:
   working-tweet-s2luv:
