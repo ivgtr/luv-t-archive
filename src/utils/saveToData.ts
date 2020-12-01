@@ -41,7 +41,7 @@ const drive = google.drive({
  * Twitterから取得したデータをspreadsheetsのデータと比較し、重複してないデータを返す
  * @param resources
  */
-const filterResources = async (resources: media[]): Promise<media[]> => {
+export const filterResources = async (resources: media[]): Promise<media[]> => {
   const filterData: media[] = []
 
   try {
@@ -68,7 +68,7 @@ const filterResources = async (resources: media[]): Promise<media[]> => {
  * ファイルを取得してdriveに保存し、正常に終了したデータのリストを返す
  * @param filterData
  */
-const saveDriveData = async (filterData: media[]) => {
+export const saveDriveData = async (filterData: media[]) => {
   // そのままspreadsheetsに登録できる様に整形したデータをいれる
   const shapData: string[][] = []
   await Promise.all(
@@ -151,7 +151,7 @@ const saveDriveData = async (filterData: media[]) => {
  * 整形したデータをspreadsheetsに登録
  * @param shapData
  */
-const setSheetData = async (shapData: string[][]): Promise<void> => {
+export const setSheetData = async (shapData: string[][]): Promise<void> => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
@@ -172,7 +172,7 @@ const setSheetData = async (shapData: string[][]): Promise<void> => {
  * 処理の結果によってboolean型を返す
  * @param resources
  */
-const saveToData = async (resources: media[]): Promise<void> => {
+export const saveToData = async (resources: media[]): Promise<void> => {
   try {
     const filterData = await filterResources(resources)
     if (filterData.length) {

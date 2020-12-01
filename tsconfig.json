@@ -16,6 +16,9 @@
   ],
   "exclude": [
     "node_modules",
-    "lib"
+    "lib",
+    "dist",
+    "tests",
+    "./*.config.ts"
   ]
 }
