@@ -13,8 +13,12 @@ _導入はかなり面倒くさいです_
 1.  `Drive API` と`Sheets API` を有効化し、`JSON` タイプのキーを作成し、保存しておきます
     1. `Drive API` と`Sheets API` を有効化します (https://console.cloud.google.com/apis/library)
     1. 作成したサービスアカウントを選択肢、`JSON` タイプのキーを作成し、保存しておきます (https://console.cloud.google.com/iam-admin/serviceaccounts)
-1. ファイルリストを保存する為に、`Google Spreadsheets` に新しいシートを作り、そのIDとシートの名前をコピーしておきます (https://docs.google.com/spreadsheets)
-1. ファイルを保存する為に、`Google Drive` にフォルダを作り、そのIDをコピーしておきます (https://drive.google.com/drive)
+1. ファイルリストを保存する為に、`Google Spreadsheets` に新しいシートを作ります (https://docs.google.com/spreadsheets)
+    1. そのIDとシートの名前をコピーしておきます
+    1. そのシートに上記で作成したサービスアカウントに共有設定します
+1. ファイルを保存する為に、`Google Drive` にフォルダを作ります (https://drive.google.com/drive)
+    1. そのIDをコピーしておきます
+    1. そのフォルダに上記で作成したサービスアカウントに共有設定します
 1. Twitter Developers ページで、任意のアカウントでログインします (https://developer.twitter.com/en/apps/)
    1. 新しいApp を作成するために開発者申請をします
    1. 新しいApp を作成し、Bearer Token を作成し、それをコピーしておきます
