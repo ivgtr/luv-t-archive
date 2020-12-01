@@ -1,9 +1,9 @@
 import fetch from 'node-fetch'
 import * as dotenv from 'dotenv'
-import { Status } from 'twitter-d'
+import type { Status } from 'twitter-d'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ja'
-import saveToData from './utils/saveToData'
+import { saveToData } from './utils/saveToData'
 
 dotenv.config()
 dayjs.locale('ja')
@@ -39,9 +39,7 @@ const getTweetLike = async (): Promise<media[]> => {
         const medias: media[] = []
         const save_time = dayjs().format('YYYY/MMMM/DD日(ddd) HH:mm')
         result.map((tweet) => {
-          const tweet_time = dayjs(tweet.created_at).format(
-            'YYYY/MMMM/DD日(ddd) HH:mm'
-          )
+          const tweet_time = dayjs(tweet.created_at).format('YYYY/MMMM/DD日(ddd) HH:mm')
           // imageもしくはvideoが存在するか判定
           if (tweet?.extended_entities?.media) {
             // 配列の形なのでそれに沿って処理

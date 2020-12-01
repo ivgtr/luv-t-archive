@@ -1,0 +1,9 @@
+{
+  "moduleFileExtensions": ["ts", "js"],
+  "coverageProvider": "v8",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "testEnvironment": "node",
+  "testMatch": ["**/tests/**/*.test.ts", "**/tests/*.test.ts"]
+}

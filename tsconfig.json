@@ -6,19 +6,18 @@
     "strict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "./lib/",
     "lib": [ "es2019" ]
   },
   "include": [
     "./src/*",
-    "./src/**/*"
+    "./src/**/*",
   ],
   "exclude": [
     "node_modules",
     "lib",
     "dist",
-    "tests",
-    "./*.config.ts"
+    "tests"
   ]
 }

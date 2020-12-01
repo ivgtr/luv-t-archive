@@ -1,8 +1,8 @@
+import { PassThrough } from 'stream'
 import { google } from 'googleapis'
 import * as dotenv from 'dotenv'
-import { PassThrough } from 'stream'
 import fetch from 'node-fetch'
-import fileType from 'file-type'
+import { fromBuffer } from 'file-type'
 
 dotenv.config()
 
@@ -18,10 +18,7 @@ const jwtClient = new google.auth.JWT(
   serviceClientEmail,
   undefined,
   servicePrivateKey,
-  [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-  ],
+  ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive'],
   undefined
 )
 
@@ -86,7 +83,7 @@ export const saveDriveData = async (filterData: media[]) => {
         })
           .then((response) => response.buffer())
           .then(async (result) => {
-            const { mime } = (await fileType.fromBuffer(result)) as {
+            const { mime } = (await fromBuffer(result)) as {
               ext: string
               mime: string
             }
@@ -186,5 +183,3 @@ export const saveToData = async (resources: media[]): Promise<void> => {
     throw new Error(error)
   }
 }
-
-export default saveToData
