@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "ncc build src/index.ts --out dist --minify",
     "lint": "eslint ./src/*.ts ./src/**/*.ts",
-    "test": "jest --silent=false --verbose false"
+    "test": "jest --silent=false --verbose"
   },
   "repository": {
     "type": "git",
