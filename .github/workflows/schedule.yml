@@ -2,9 +2,7 @@ name: Save to Love Tweet Working
 
 on:
   schedule:
-    - cron: "0 5,17, * * *"
-  push:
-    branches: [ master ]
+    - cron: "0 5,17 * * *"
 
 jobs:
   working-luvT-archive:
