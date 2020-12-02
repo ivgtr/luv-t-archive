@@ -3,8 +3,8 @@ import { saveData } from './utils/saveTweetData'
 
 const main = async () => {
   try {
-    const mediaData = await getLuvTweet()
-    await saveData(mediaData)
+    const tweetData = await getLuvTweet()
+    await saveData(tweetData)
     console.log('全ての処理が完了')
   } catch (error) {
     console.log(`何か問題が起きた様です\n${error}`)

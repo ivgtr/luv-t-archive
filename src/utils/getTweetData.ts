@@ -8,7 +8,10 @@ dotenv.config()
 dayjs.locale('ja')
 
 const { TWITTER_ID: twitterId, TWITTER_TOKEN: twitterToken } = process.env
-const url = 'https://api.twitter.com/1.1/favorites/list.json'
+const endpoint = 'https://api.twitter.com/1.1/favorites/list.json'
+
+// tweet取得数
+const count = 200
 
 //
 /**
@@ -26,14 +29,11 @@ export const getLuvTweet = async (): Promise<media[]> => {
     headers
   }
 
-  // tweet取得数
-  const count = 50
-
   const favoriteData: media[] = await new Promise((resolve, reject) => {
     const param = `?screen_name=${twitterId}&count=${count}&trim_user=true&tweet_mode=extended`
 
     // tweetを取得
-    fetch(url + param, options)
+    fetch(endpoint + param, options)
       .then((response) => response.json())
       .then((result: Status[]) => {
         // 整形したものが入る
@@ -50,11 +50,8 @@ export const getLuvTweet = async (): Promise<media[]> => {
               // videoの場合の処理
               if (media.type === 'video' && media?.video_info?.variants) {
                 // bitrate順に並び替えて一番良いものを返す
-                const getNumSafe = ({
-                  bitrate = -Infinity
-                }: {
-                  bitrate?: number | undefined | null
-                }) => bitrate as number
+                const getNumSafe = ({ bitrate = -Infinity }: { bitrate?: number | null }) =>
+                  bitrate as number
                 video_url = media.video_info.variants.reduce((acc, r) =>
                   getNumSafe(r) > getNumSafe(acc) ? r : acc
                 )
