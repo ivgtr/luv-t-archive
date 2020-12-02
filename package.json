@@ -1,7 +1,7 @@
 {
-  "name": "tweet-s2luv",
+  "name": "luv-t-archive",
   "version": "0.1.0",
-  "description": "",
+  "description": "🤖 Automatically Archive Images and Videos of Your Favorite/Like Tweets.",
   "main": "./lib/index.js",
   "scripts": {
     "prestart": "rimraf lib",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivgtr/tweet-s2luv.git"
+    "url": "git+https://github.com/ivgtr/luv-t-archive.git"
   },
   "author": "ivgtr <gear.1112t.o@gmail.com> (https://github.com/ivgtr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivgtr/tweet-s2luv/issues"
+    "url": "https://github.com/ivgtr/luv-t-archive/issues"
   },
-  "homepage": "https://github.com/ivgtr/tweet-s2luv#readme",
+  "homepage": "https://github.com/ivgtr/luv-t-archive#readme",
   "dependencies": {
     "dayjs": "^1.9.6",
     "dotenv": "^8.2.0",

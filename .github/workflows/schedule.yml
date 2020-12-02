@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  working-tweet-s2luv:
+  working-luvT-archive:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: working tweet-s2luv!
+      - name: working luvT-archive!
         run: |
           node dist/index.js
         env:
