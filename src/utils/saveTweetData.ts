@@ -36,7 +36,9 @@ const drive = google.drive({
 
 /**
  * Twitterから取得したデータをspreadsheetsのデータと比較し、重複してないデータを返す
- * @param resources
+ * @param {media[]} resources 取得し、整形したデータ
+ *
+ * @returns {Promise<media[]>} 取得したデータから重複を省いたデータ
  */
 export const filterResources = async (resources: media[]): Promise<media[]> => {
   const filterData: media[] = []
@@ -63,9 +65,11 @@ export const filterResources = async (resources: media[]): Promise<media[]> => {
 
 /**
  * ファイルを取得してdriveに保存し、正常に終了したデータのリストを返す
- * @param filterData
+ * @param {media[]} filterData 取得したデータから重複を省いたデータ
+ *
+ * @returns {Promise<string[][]>} driveにuploadが成功し、sheetに登録しやすい様に整形したデータ
  */
-export const saveDriveData = async (filterData: media[]) => {
+export const saveDrive = async (filterData: media[]): Promise<string[][]> => {
   // そのままspreadsheetsに登録できる様に整形したデータをいれる
   const shapData: string[][] = []
   await Promise.all(
@@ -150,7 +154,7 @@ export const saveDriveData = async (filterData: media[]) => {
  * 整形したデータをspreadsheetsに登録
  * @param shapData
  */
-export const setSheetData = async (shapData: string[][]): Promise<void> => {
+export const updateSheet = async (shapData: string[][]): Promise<void> => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId: sheetId,
@@ -171,12 +175,12 @@ export const setSheetData = async (shapData: string[][]): Promise<void> => {
  * 一連の処理のエラーをハンドリングする
  * @param resources
  */
-export const saveToData = async (resources: media[]): Promise<void> => {
+export const saveData = async (resources: media[]): Promise<void> => {
   try {
     const filterData = await filterResources(resources)
     if (filterData.length) {
-      const shapData = await saveDriveData(filterData)
-      await setSheetData(shapData)
+      const shapData = await saveDrive(filterData)
+      await updateSheet(shapData)
       console.log(`${shapData.length}件追加しました`)
     } else {
       console.log('新しいデータはありません')
