@@ -50,12 +50,15 @@ export const filterResources = async (resources: media[]): Promise<media[]> => {
     })
     const names: string[] = responseGetSheet?.data?.values?.flat() || []
 
-    resources.map((media) => {
-      if (!names.includes(media.file_name)) {
-        filterData.push(media)
-      }
-      return media
-    })
+    resources
+      .slice(0)
+      .reverse()
+      .map((media) => {
+        if (!names.includes(media.file_name) && filterData.length < 90) {
+          filterData.push(media)
+        }
+        return media
+      })
   } catch (error) {
     throw `The get Sheet API returned an ${error}`
   }
@@ -173,7 +176,7 @@ export const updateSheet = async (shapData: string[][]): Promise<void> => {
 //
 /**
  * 一連の処理のエラーをハンドリングする
- * @param resources
+ * @param resources 取得し、整形されたtweetデータ
  */
 export const saveData = async (resources: media[]): Promise<void> => {
   try {
