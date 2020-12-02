@@ -35,6 +35,19 @@ const drive = google.drive({
 })
 
 /**
+ * Sheets APIから名前のデータを取得し、使い易いように浅くして返す
+ * @returns {Promise<string[]>} sheetsに登録されている名前のデータ
+ */
+export const getSheetsNamesData = async (): Promise<string[]> => {
+  const sheetsNamesData = await sheets.spreadsheets.values.get({
+    spreadsheetId: sheetId,
+    range: `${sheetName}!C:C`
+  })
+
+  return sheetsNamesData?.data?.values?.flat() || []
+}
+
+/**
  * Twitterから取得したデータをspreadsheetsのデータと比較し、重複してないデータを返す
  * @param {media[]} resources 取得し、整形したデータ
  *
@@ -44,17 +57,13 @@ export const filterResources = async (resources: media[]): Promise<media[]> => {
   const filterData: media[] = []
   if (!resources.length) return filterData
   try {
-    const responseGetSheet = await sheets.spreadsheets.values.get({
-      spreadsheetId: sheetId,
-      range: `${sheetName}!C:C`
-    })
-    const names: string[] = responseGetSheet?.data?.values?.flat() || []
+    const namesData: string[] = await getSheetsNamesData()
 
     resources
       .slice(0)
       .reverse()
       .map((media) => {
-        if (!names.includes(media.file_name) && filterData.length < 90) {
+        if (!namesData.includes(media.file_name) && filterData.length < 90) {
           filterData.push(media)
         }
         return media
