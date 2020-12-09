@@ -108,9 +108,7 @@ export const saveDrive = async (filterData: media[]): Promise<string[][]> => {
               mime
             })
           })
-          .catch((error) => {
-            return reject(error)
-          })
+          .catch((error) => reject(error))
       })
 
       await new Promise((resolve, reject) => {

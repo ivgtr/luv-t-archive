@@ -76,9 +76,7 @@ export const getLuvTweet = async (): Promise<media[]> => {
         // 一通り処理したものをPromise元に返す
         return resolve(medias)
       })
-      .catch((err) => {
-        return reject(err)
-      })
+      .catch((err) => reject(err))
   })
 
   // 呼び出し元に整形したものを返す
