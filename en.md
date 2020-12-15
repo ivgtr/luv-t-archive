@@ -34,7 +34,7 @@ Fork this repository and register the required `Token` to `Settings > Secrets` a
 1. Go to the repo Settings > Secrets
 1. Add the following environment variables::
    - **TWITTER_TOKEN:** Created Twitter Bearer Token
-   - **SHEET_NAME:** The ID portion from your Spreadsheets sheets url: `https://docs.google.com/spreadsheets/d/`**`xxxxxxxxxxxxxxxxxxxx`**`/edit`.
+   - **SHEET_ID:** The ID portion from your Spreadsheets sheets url: `https://docs.google.com/spreadsheets/d/`**`xxxxxxxxxxxxxxxxxxxx`**`/edit`.
    - **DRIVE_FOLDER_ID:** The ID portion from your Drive folder url: `https://drive.google.com/drive/folders/`**`xxxxxxxxxxxxxxxxxxxx`**.
    - **SERVICE_CLIENT_EMAIL:** The `client_email` part of the `JSON` key for the stored service account.
    - **SERVICE_PRIVATE_KEY:** The `private_key` part of the `JSON` key for the stored service account.

@@ -36,7 +36,7 @@ JA | [EN](https://github.com/ivgtr/luv-t-archive/blob/master/en.md)
 1. repository のSettings > Secrets へ行きます
 1. 以下の環境変数を追加します:
    - **TWITTER_TOKEN:** 上記で生成された Twitter のBearer Token
-   - **SHEET_NAME:** 利用するSpreadsheets のシートID: `https://docs.google.com/spreadsheets/d/`**`xxxxxxxxxxxxxxxxxxxx`**`/edit`
+   - **SHEET_ID:** 利用するSpreadsheets のシートID: `https://docs.google.com/spreadsheets/d/`**`xxxxxxxxxxxxxxxxxxxx`**`/edit`
    - **DRIVE_FOLDER_ID:** 利用するDrive のシートID: `https://drive.google.com/drive/folders/`**`xxxxxxxxxxxxxxxxxxxx`**.
    - **SERVICE_CLIENT_EMAIL:** 上記で保存したサービスアカウントの`JSON` 鍵の`client_email` 部分
    - **SERVICE_PRIVATE_KEY:** 上記で保存したサービスアカウントの`JSON` 鍵の`private_key` 部分
