@@ -1,15 +1,16 @@
 name: CI
 
-on:
-  schedule:
-    - cron: '0 5,17 * * *'
+# on:
+#   schedule:
+#     - cron: '0 5,17 * * *'
+on: push
 
 jobs:
   working-luvT-archive:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@master
