@@ -39,6 +39,9 @@ export const getLuvTweet = async (): Promise<media[]> => {
         // 整形したものが入る
         const medias: media[] = []
         const save_time = dayjs().format('YYYY/MMMM/DD日(ddd) HH:mm')
+        if (!result.length) {
+          throw new Error('Tweetを取得できませんでした')
+        }
         result.map((tweet) => {
           const tweet_time = dayjs(tweet.created_at).format('YYYY/MMMM/DD日(ddd) HH:mm')
           // imageもしくはvideoが存在するか判定

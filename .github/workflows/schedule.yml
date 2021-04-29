@@ -2,7 +2,7 @@ name: Save to Love Tweet Working
 
 on:
   schedule:
-    - cron: "0 5,17 * * *"
+    - cron: '0 5,17 * * *'
 
 jobs:
   working-luvT-archive:
@@ -19,7 +19,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: working luvT-archive!
         run: |
-          node dist/index.js
+          yarn
+          yarn workflow
         env:
           TZ: Asia/Tokyo
           TWITTER_ID: mawaru_hana

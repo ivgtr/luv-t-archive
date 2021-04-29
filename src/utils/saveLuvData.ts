@@ -1,8 +1,8 @@
-import { PassThrough } from 'stream'
 import * as dotenv from 'dotenv'
 import { fromBuffer } from 'file-type'
 import { google } from 'googleapis'
 import fetch from 'node-fetch'
+import { PassThrough } from 'stream'
 
 dotenv.config()
 
@@ -185,7 +185,7 @@ export const updateSheet = async (shapData: string[][]): Promise<void> => {
  * 一連の処理のエラーをハンドリングする
  * @param resources 取得し、整形されたtweetデータ
  */
-export const saveData = async (resources: media[]): Promise<void> => {
+export const saveLuvData = async (resources: media[]): Promise<void> => {
   try {
     const filterData = await filterResources(resources)
     if (filterData.length) {
