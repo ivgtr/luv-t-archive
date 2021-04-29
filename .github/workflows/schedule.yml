@@ -1,4 +1,4 @@
-name: Save to Love Tweet Working
+name: CI
 
 on:
   schedule:
