@@ -1,4 +1,4 @@
-import * as saveTweetData from '../src/utils/saveTweetData'
+import * as saveTweetData from '../utils/saveLuvData'
 
 const data1 = {
   tweet_url: 'data1',
@@ -34,10 +34,8 @@ describe('saveToData: (resources: media[])', (): void => {
 
   test('filterResourcesの返り値が空の時、正しく処理のガードが行われているか', async () => {
     const spyLog = jest.spyOn(console, 'log')
-    filterResources.mockImplementation(async () => {
-      return []
-    })
-    await saveTweetData.saveData([])
+    filterResources.mockImplementation(async () => [])
+    await saveTweetData.saveLuvData([])
 
     expect(saveDrive).not.toHaveBeenCalled()
     expect(spyLog).toHaveBeenCalledWith('新しいデータはありません')
@@ -67,9 +65,7 @@ describe('filterResources: (resources: media[])', (): void => {
 
   test('引数が存在するとき、重複データを削除したデータが返ってくる', async () => {
     const sheetsNamesData = jest.spyOn(saveTweetData, 'getSheetsNamesData')
-    sheetsNamesData.mockImplementation(async () => {
-      return [data2.file_name]
-    })
+    sheetsNamesData.mockImplementation(async () => [data2.file_name])
 
     resources = [data1, data2, data3]
     const correct = [data3, data1]
