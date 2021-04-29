@@ -1,9 +1,8 @@
 name: CI
 
-# on:
-#   schedule:
-#     - cron: '0 5,17 * * *'
-on: push
+on:
+  schedule:
+    - cron: '0 5,17 * * *'
 
 jobs:
   working-luvT-archive:
