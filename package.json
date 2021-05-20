@@ -7,7 +7,8 @@
     "prestart": "rimraf lib",
     "start": "tsc -w",
     "prebuild": "rimraf dist",
-    "workflow": "ts-node --files ./src/index.ts",
+    "build": "ncc build ./src/index.ts -o dist --transpile-only",
+    "workflow": "node dist",
     "lint": "eslint ./src/*.ts ./src/**/*.ts",
     "test": "jest --silent=false --verbose"
   },
@@ -23,24 +24,24 @@
   "homepage": "https://github.com/ivgtr/luv-t-archive#readme",
   "dependencies": {
     "dayjs": "^1.10.4",
-    "dotenv": "^8.2.0",
-    "file-type": "^16.3.0",
+    "dotenv": "^9.0.2",
+    "file-type": "^16.4.0",
     "googleapis": "^73.0.0",
     "node-fetch": "^2.6.1",
     "twitter-d": "^0.4.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
-    "@types/node": "^15.0.1",
+    "@types/node": "^15.3.1",
     "@types/node-fetch": "^2.5.10",
-    "@vercel/ncc": "^0.28.4",
-    "eslint": "^7.25.0",
+    "@vercel/ncc": "^0.28.5",
+    "eslint": "^7.26.0",
     "eslint-config-sumikko": "^1.1.2",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.0",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.5",
+    "ts-jest": "^26.5.6",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }

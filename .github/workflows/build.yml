@@ -1,0 +1,36 @@
+name: Build and Push
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15
+      - name: Test
+        run: |
+          npm ci
+          npm test
+      - name: Build
+        run: npm run build
+      - name: git setting
+        run: |
+          git config --local user.email "ivgtr.me@gmail.com"
+          git config --local user.name "ivgtr"
+      - name: Commit and Push
+        run: |
+          git add .
+          git commit -m "🤖 run: CI Build" -a
+          git pull
+          git push origin master
