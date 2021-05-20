@@ -1,11 +1,8 @@
 name: Build and Push
 
-# on:
-#   release:
-#     types: [published]
 on:
-  push:
-    branches: [master]
+  release:
+    types: [published]
 
 jobs:
   push:
