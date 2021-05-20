@@ -34,5 +34,5 @@ jobs:
         run: |
           git add .
           git commit -m "🤖 run: CI Build" -a
-          git pull
+          git pull origin master
           git push origin master
