@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-        with:
-          fetch-depth: 0
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -30,9 +28,9 @@ jobs:
         run: |
           git config --local user.email "ivgtr.me@gmail.com"
           git config --local user.name "ivgtr"
-      - name: Commit and Push
-        run: |
           git add .
           git commit -m "🤖 run: CI Build" -a
-          git pull origin master
-          git push origin master
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
