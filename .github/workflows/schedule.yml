@@ -3,6 +3,7 @@ name: Get luvData
 on:
   schedule:
     - cron: "0 5,17 * * *"
+  workflow_dispatch:
 
 jobs:
   working-luvT-archive:
