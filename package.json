@@ -1,6 +1,6 @@
 {
   "name": "luv-t-archive",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "🤖 Automatically Archive Images and Videos of Your Favorite/Like Tweets.",
   "private": true,
   "scripts": {
