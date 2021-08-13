@@ -2,7 +2,7 @@
   "name": "luv-t-archive",
   "version": "0.2.3",
   "description": "🤖 Automatically Archive Images and Videos of Your Favorite/Like Tweets.",
-  "main": "./lib/index.js",
+  "private": true,
   "scripts": {
     "prestart": "rimraf lib",
     "start": "tsc -w",
